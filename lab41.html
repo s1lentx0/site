@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #eee;
+        }
+        .cube {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            transform-style: preserve-3d;
+        }
+        .face {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0.9;
+        }
+        .front {
+            background-color: red;
+        }
+        .top {
+            background-color: yellow;
+            transform: rotateX(60deg) translateY(-50px);
+        }
+        .side {
+            background-color: green;
+            transform: rotateY(60deg) translateX(50px);
+        }
+    </style>
+</head>
+<body>
+    <div class="cube">
+        <div class="face front"></div>
+        <div class="face top"></div>
+        <div class="face side"></div>
+    </div>
+</body>
+</html>
