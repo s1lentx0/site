@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quadratic Equation Solver</title>
+    <script>
+        function solveQuadratic() {
+            let a = prompt("Enter coefficient a:");
+            let b = prompt("Enter coefficient b:");
+            let c = prompt("Enter coefficient c:");
+
+            a = parseFloat(a);
+            b = parseFloat(b);
+            c = parseFloat(c);
+
+                if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) {
+                alert("Invalid input! 'a' should be a non-zero number.");
+                console.log("Invalid input! 'a' should be a non-zero number.");
+                return;
+            }
+
+            let delta = b * b - 4 * a * c;
+
+                if (delta < 0) {
+                alert("No real roots exist since delta is negative.");
+                console.log("No real roots exist since delta is negative.");
+                return;
+            }
+
+            let x1 = (-b + Math.sqrt(delta)) / (2 * a);
+            let x2 = (-b - Math.sqrt(delta)) / (2 * a);
+
+            alert(`The roots are x1 = ${x1} and x2 = ${x2}`);
+            console.log(`The roots are x1 = ${x1} and x2 = ${x2}`);
+        }
+    </script>
+</head>
+<body>
+    <h2>Quadratic Equation Solver</h2>
+    <button onclick="solveQuadratic()">Solve Quadratic Equation</button>
+</body>
+</html>
