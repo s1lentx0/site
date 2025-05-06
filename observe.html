@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar System Simulation</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      cursor: pointer;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    #info-table-container {
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Solar System Simulation</h1>
+  <p>Click anywhere on the page to display the Solar System objects summary table.</p>
+
+  <div id="info-table-container">
+    <table id="info-table" border="1">
+      <thead>
+        <tr>
+          <th data-key="name">Name</th>
+          <th data-key="mass">Mass (kg)</th>
+          <th data-key="orbitRadius">Orbit Radius (km)</th>
+          <th data-key="color">Color</th>
+          <th data-key="diameter">Diameter (km)</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    const solarObjects = [
+      { name: "Mercury", mass: 3.3e23, orbitRadius: 57910000, color: "gray", diameter: 4879 },
+      { name: "Venus", mass: 4.87e24, orbitRadius: 108200000, color: "yellow", diameter: 12104 },
+      { name: "Earth", mass: 5.97e24, orbitRadius: 149600000, color: "blue", diameter: 12742 },
+      { name: "Mars", mass: 6.42e23, orbitRadius: 227900000, color: "red", diameter: 6779 },
+      { name: "Jupiter", mass: 1.9e27, orbitRadius: 778500000, color: "orange", diameter: 139820 },
+      { name: "Saturn", mass: 5.68e26, orbitRadius: 1433000000, color: "golden", diameter: 116460 },
+      { name: "Uranus", mass: 8.68e25, orbitRadius: 2871000000, color: "lightblue", diameter: 50724 },
+      { name: "Neptune", mass: 1.02e26, orbitRadius: 4495000000, color: "blue", diameter: 49528 },
+      { name: "Pluto", mass: 1.31e22, orbitRadius: 5913000000, color: "brown", diameter: 2376 },
+      { name: "Ceres", mass: 9.39e20, orbitRadius: 413700000, color: "gray", diameter: 940 }
+    ];
+
+    document.addEventListener("click", () => {
+      const container = document.getElementById("info-table-container");
+      container.style.display = "block";
+      populateTable(solarObjects);
+    });
+
+    function populateTable(data) {
+      const tbody = document.querySelector("#info-table tbody");
+      tbody.innerHTML = "";
+
+      data.forEach(obj => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${obj.name}</td>
+          <td>${obj.mass.toExponential(2)}</td>
+          <td>${obj.orbitRadius.toLocaleString()}</td>
+          <td style="background:${obj.color};">${obj.color}</td>
+          <td>${obj.diameter.toLocaleString()}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    let currentSortKey = null;
+    let ascending = true;
+
+    document.querySelectorAll("#info-table th").forEach(th => {
+      th.addEventListener("click", () => {
+        const key = th.dataset.key;
+        if (currentSortKey === key) ascending = !ascending;
+        else {
+          currentSortKey = key;
+          ascending = true;
+        }
+
+        const sorted = [...solarObjects].sort((a, b) => {
+          if (typeof a[key] === "string") {
+            return ascending ? a[key].localeCompare(b[key]) : b[key].localeCompare(a[key]);
+          }
+          return ascending ? a[key] - b[key] : b[key] - a[key];
+        });
+
+        populateTable(sorted);
+      });
+    });
+  </script>
+
+</body>
+</html>
