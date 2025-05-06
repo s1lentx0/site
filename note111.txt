@@ -1,0 +1,29 @@
+The problem statement:
+ We are going to develop a software tool to merge two sheets,one is the offical student roster, 
+the other, typically, the grades coming from the 3rd party system, such as runstone.
+The issue is that the name lists from two side are not 100%matching.
+This is our raw design of a front-end web app for solvingthe problem. 
+There should be two textareas sitting side by side.
+The left one will hold the official student roster andright holds the data from the 3rd party system.
+The should be buttons for open file, parse the content offile to generate a data Sheet.
+Each sheet is 2D, has headings.
+We then should match the ID columns and identify mismatches to allow users to do manual match.
+For matched rows of data ,the desired columns of data from right should be merged to the left and then allow users to download the merged file.
+
+
+class Sheet
+
+constructor(fileorcontent){
+	this.content = null;
+	this.data2d = [];
+	this.heading [];
+	this.numcols = 0;
+	this.numrecords = 0;
+	this.extra = [];
+	this.mereingeolumns = []
+	this.keycolumn = identifykey()
+	}
+	identifykey(){}
+	parse()[]//parse content csv data to data2d
+		    //using split(/\n/),split(/,/)
+	match(){}
