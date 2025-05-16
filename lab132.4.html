@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Click Coordinates</title>
+  <style>
+    #clickArea {
+      width: 400px;
+      height: 300px;
+      border: 2px solid #333;
+      margin-top: 20px;
+      position: relative;
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <h2>Click anywhere inside the box below</h2>
+  <div id="clickArea">Click inside this box</div>
+  <p id="output"></p>
+
+  <script>
+    const clickArea = document.getElementById('clickArea');
+    const output = document.getElementById('output');
+
+    clickArea.addEventListener('click', function(event) {
+      const rect = clickArea.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      output.textContent = `Clicked at: X = ${x}, Y = ${y}`;
+    });
+  </script>
+</body>
+</html>
+
